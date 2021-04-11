@@ -1,27 +1,26 @@
 package com.example.springTdBeuh.model;
+
 import javax.persistence.*;
 
 @Entity
 public class OrderLine {
+
     @Id
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column()
-    private int quantity;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="order_user_id", nullable=false)
     private OrderUser orderUser;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable=false)
     private Product product;
 
-    public OrderLine(Long id, int quantity) {
-        this.id = id;
-        this.quantity = quantity;
 
-    }
-
-    public OrderLine() {}
+    @Column()
+    private int quantity;
 
     public Long getId() {
         return id;
@@ -31,6 +30,7 @@ public class OrderLine {
         this.id = id;
     }
 
+
     public int getQuantity() {
         return quantity;
     }
@@ -39,11 +39,12 @@ public class OrderLine {
         this.quantity = quantity;
     }
 
-    public OrderUser getOrder() {
+
+    public OrderUser getOrderUser() {
         return orderUser;
     }
 
-    public void setOrder(OrderUser orderUser) {
+    public void setOrderUser(OrderUser orderUser) {
         this.orderUser = orderUser;
     }
 
@@ -54,6 +55,4 @@ public class OrderLine {
     public void setProduct(Product product) {
         this.product = product;
     }
-
-
 }

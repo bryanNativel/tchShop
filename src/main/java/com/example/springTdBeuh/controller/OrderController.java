@@ -9,48 +9,48 @@ import java.util.Optional;
 
 @RestController
 public class OrderController {
-    private final OrderRepository repository;
+    private final OrderRepository repositoryOrder;
 
-     OrderController(OrderRepository repository) {
-        this.repository = repository;
-    }
+     OrderController(OrderRepository repositoryOrder) {
+         this.repositoryOrder = repositoryOrder;
+     }
 
     @GetMapping("/order")
     List<OrderUser> all() {
-        return repository.findAll();
+        return repositoryOrder.findAll();
     }
 
     // end::get-aggregate-root[]
     @PostMapping("/order")
     OrderUser newOrder(@RequestBody OrderUser newOrderUser) {
-        return repository.save(newOrderUser);
+        return repositoryOrder.save(newOrderUser);
     }
 
     // Single item
     @GetMapping("/order/{id}")
     Optional<OrderUser> one(@PathVariable Long id) {
-        return repository.findById(id);
+        return repositoryOrder.findById(id);
     }
 
 //    @PutMapping("/order/{id}")
 //    Order replaceOrder(@RequestBody Order newOrder, @PathVariable Long id) {
 //
-//        return repository.findById(id)
+//        return repositoryOrder.findById(id)
 //                .map(order -> {
 //                    order.setSerialNumber(newOrder.getSerialNumber());
 //                    order.setPrice(newOrder.getPrice());
 //                    order.setUnit(newOrder.getUnit());
 //                    order.setQuantityInStock(newOrder.getQuantityInStock());
-//                    return repository.save(order);
+//                    return repositoryOrder.save(order);
 //                })
 //                .orElseGet(() -> {
 //                    newOrder.setId(id);
-//                    return repository.save(newOrder);
+//                    return repositoryOrder.save(newOrder);
 //                });
 //    }
 
     @DeleteMapping("/order/{id}")
     void deleteOrder(@PathVariable Long id) {
-        repository.deleteById(id);
+        repositoryOrder.deleteById(id);
     }
 }

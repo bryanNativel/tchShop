@@ -1,11 +1,12 @@
 package com.example.springTdBeuh.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column()
     private String serialNumber;
@@ -17,6 +18,9 @@ public class Product {
     private int quantityInStock;
     @OneToOne
     private Variety listOfVariety;
+
+    @OneToMany(mappedBy="product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<OrderLine> OrderLine;
 
     public Product(Long id, String serialNumber, int price, int unit, int quantityInStock, Variety listOfVariety) {
         this.id = id;
@@ -72,7 +76,7 @@ public class Product {
         return listOfVariety;
     }
 
-    public void setListOfVariety(Variety listOfVariety) {
+    public void setListOfVariety(  Variety listOfVariety) {
         this.listOfVariety = listOfVariety;
     }
 }

@@ -16,24 +16,24 @@ public class ProductController {
         this.repository = repository;
     }
 
-    @GetMapping("/products")
+    @GetMapping("/product")
     List<Product> all() {
         return repository.findAll();
     }
 
     // end::get-aggregate-root[]
-    @PostMapping("/products")
+    @PostMapping("/product")
     Product newProduct(@RequestBody Product newProduct) {
         return repository.save(newProduct);
     }
 
     // Single item
-    @GetMapping("/products/{id}")
+    @GetMapping("/product/{id}")
     Optional<Product> one(@PathVariable Long id) {
         return repository.findById(id);
     }
 
-    @PutMapping("/products/{id}")
+    @PutMapping("/product/{id}")
     Product replaceProduct(@RequestBody Product newProduct, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -50,7 +50,7 @@ public class ProductController {
                 });
     }
 
-    @DeleteMapping("/products/{id}")
+    @DeleteMapping("/product/{id}")
     void deleteProduct(@PathVariable Long id) {
         repository.deleteById(id);
     }
