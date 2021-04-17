@@ -4,6 +4,7 @@ import com.example.springTdBeuh.model.Product;
 import com.example.springTdBeuh.repo.ProductRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,27 @@ public class ProductController {
     @PostMapping("/product")
     Product newProduct(@RequestBody Product newProduct) {
         return repository.save(newProduct);
+    }
+
+    // Single item
+    @GetMapping("/product/searchName/{serialName}")
+    List<Product> SearchName(@PathVariable String serialName) {
+      return repository.findCustomerSearchName(serialName);
+    }
+    // Single item
+    @GetMapping("/product/searchVariety/{variety}")
+    List<Product> SearchVariety( @PathVariable String variety) {
+        return repository.findCustomerSearchVariety(variety);
+    }
+    // Single item
+    @GetMapping("/product/searchPrice/{price}")
+    List<Product> SearchPrice(@PathVariable int price){
+        return repository.findCustomerSearchPrice(price);
+    }
+    // Single item
+    @GetMapping("/product/searchStock")
+    List<Product> SearchStock() throws ParseException {
+        return repository.findCustomerSearchStock();
     }
 
     // Single item

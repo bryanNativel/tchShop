@@ -1,7 +1,12 @@
 package com.example.springTdBeuh.model;
 
+import org.springframework.format.datetime.standard.DateTimeContext;
+
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,21 +18,20 @@ public class OrderUser {
     private Long id;
     @Column()
     private Date dateOrder;
+
     @OneToOne()
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy="orderUser",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<OrderLine> OrderLine;
 
     public OrderUser(Long id, Date dateOrder, User user) {
         this.id = id;
         this.dateOrder = dateOrder;
         this.user = user;
-    }
-    public OrderUser() {
 
     }
+
+    public OrderUser() {}
 
     public Long getId() {
         return id;
@@ -53,12 +57,6 @@ public class OrderUser {
         this.user = user;
     }
 
-    public Set<com.example.springTdBeuh.model.OrderLine> getOrderLine() {
-        return OrderLine;
-    }
 
-    public void setOrderLine(Set<com.example.springTdBeuh.model.OrderLine> orderLine) {
-        OrderLine = orderLine;
-    }
 
 }

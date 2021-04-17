@@ -10,17 +10,28 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="order_user_id", nullable=false)
+    @Column()
+    private int quantity;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
+    @JoinColumn(name="orderUserId")
     private OrderUser orderUser;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_id", nullable=false)
+    @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
+    @JoinColumn(name="product_id")
     private Product product;
 
 
-    @Column()
-    private int quantity;
+    public OrderLine(Long id, OrderUser orderUser, Product product, int quantity) {
+        this.id = id;
+        this.orderUser = orderUser;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public OrderLine() {
+
+    }
 
     public Long getId() {
         return id;
@@ -38,7 +49,6 @@ public class OrderLine {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
 
     public OrderUser getOrderUser() {
         return orderUser;

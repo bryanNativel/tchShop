@@ -19,9 +19,6 @@ public class Product {
     @OneToOne
     private Variety listOfVariety;
 
-    @OneToMany(mappedBy="product",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<OrderLine> OrderLine;
-
     public Product(Long id, String serialNumber, int price, int unit, int quantityInStock, Variety listOfVariety) {
         this.id = id;
         this.serialNumber = serialNumber;

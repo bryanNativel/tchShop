@@ -11,7 +11,8 @@ import java.util.Optional;
 public class OrderController {
     private final OrderRepository repositoryOrder;
 
-     OrderController(OrderRepository repositoryOrder) {
+
+    OrderController(OrderRepository repositoryOrder) {
          this.repositoryOrder = repositoryOrder;
      }
 
@@ -23,6 +24,7 @@ public class OrderController {
     // end::get-aggregate-root[]
     @PostMapping("/order")
     OrderUser newOrder(@RequestBody OrderUser newOrderUser) {
+
         return repositoryOrder.save(newOrderUser);
     }
 
